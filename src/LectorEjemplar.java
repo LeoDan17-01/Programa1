@@ -6,6 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Lee un archivo de texto con un ejemplar de Vertex Cover.
+ * El formato es: lineas "n <num>", "k <num>", "aristas" y luego pares "u v".
+ * Las lineas vacias y las que empiezan con # se ignoran.
+ */
+
 public class LectorEjemplar {
 
     public static class Ejemplar {
@@ -38,11 +44,11 @@ public class LectorEjemplar {
                             enAristas = true;
                             break;
                         default:
-                            throw new IOException("Línea no reconocida: " + linea);
+                            throw new IOException("Linea no reconocida: " + linea);
                     }
                 } else {
                     if (partes.length != 2) {
-                        throw new IOException("Arista inválida: " + linea);
+                        throw new IOException("Arista invalida: " + linea);
                     }
                     int u = Integer.parseInt(partes[0]);
                     int v = Integer.parseInt(partes[1]);
@@ -51,8 +57,8 @@ public class LectorEjemplar {
             }
         }
 
-        if (e.n <= 0) throw new IOException("Falta la línea 'n <num>' o es inválida.");
-        if (e.k < 0) throw new IOException("Falta la línea 'k <num>' o es inválida.");
+        if (e.n <= 0) throw new IOException("Falta la linea 'n <num>' o es invalida.");
+        if (e.k < 0) throw new IOException("Falta la linea 'k <num>' o es invalida.");
         return e;
     }
 }

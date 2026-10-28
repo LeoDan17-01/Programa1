@@ -3,6 +3,11 @@ package src;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Lee un ejemplar de Vertex Cover, construye la grafica G
+ * aplica la reduccion a Dominating Set e imprime un reporte.
+ */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -18,7 +23,7 @@ public class Main {
             // 1. Leer ejemplar de Vertex Cover
             LectorEjemplar.Ejemplar ej = LectorEjemplar.leer(ruta);
 
-            // 2. Construir la gráfica original G
+            // 2. Construir la grafica original G
             Grafica g = new Grafica();
             for (int i = 1; i <= ej.n; i++) {
                 g.agregarNodo(new Nodo(i, true, "v" + i));
@@ -27,7 +32,7 @@ public class Main {
                 g.agregarArista(a[0], a[1]);
             }
 
-            // 3. Aplicar la reducción
+            // 3. Aplicar la reduccion
             Grafica gp = Reduccion.reducir(g);
 
             // 4. Reporte
@@ -41,12 +46,12 @@ public class Main {
 
     private static void imprimirReporte(Grafica g, Grafica gp, int k) {
         System.out.println("=================================================");
-        System.out.println("  REDUCCIÓN VERTEX COVER -> DOMINATING SET");
+        System.out.println("  REDUCCION VERTEX COVER -> DOMINATING SET");
         System.out.println("=================================================\n");
 
         // --- Grafica original ---
-        System.out.println("--- Gráfica original G ---");
-        System.out.println("Vértices originales:");
+        System.out.println("--- Grafica original G ---");
+        System.out.println("Vertices originales:");
         for (Nodo n : g.getNodos()) {
             System.out.println("  " + n.getEtiqueta() + " (id=" + n.getId() + ")");
         }
@@ -58,16 +63,16 @@ public class Main {
         }
 
         // --- Grafica reducida ---
-        System.out.println("\n--- Gráfica reducida G' (Dominating Set) ---");
+        System.out.println("\n--- Grafica reducida G' (Dominating Set) ---");
 
-        System.out.println("Vértices originales conservados:");
+        System.out.println("Vertices originales conservados:");
         for (Nodo n : gp.getNodos()) {
             if (n.isEsOriginal()) {
                 System.out.println("  " + n.getEtiqueta() + " (id=" + n.getId() + ")");
             }
         }
 
-        System.out.println("\nNuevos vértices agregados (uno por arista):");
+        System.out.println("\nNuevos vertices agregados (uno por arista):");
         for (Nodo n : gp.getNodos()) {
             if (!n.isEsOriginal()) {
                 System.out.println("  " + n.getEtiqueta() + " (id=" + n.getId() + ")");
@@ -79,7 +84,7 @@ public class Main {
             System.out.println("  (" + a[0] + ", " + a[1] + ")");
         }
 
-        System.out.println("\nNuevas aristas agregadas (triángulos):");
+        System.out.println("\nNuevas aristas agregadas (triangulos):");
         // Las nuevas aristas son las que tocan a un nodo nuevo
         for (int[] a : gp.getAristas()) {
             Nodo u = gp.buscarNodo(a[0]);

@@ -5,19 +5,19 @@ import java.util.List;
 public class Reduccion {
 
     /**
-     * Aplica la reducción Vertex Cover -> Dominating Set.
+     * Aplica la reduccion Vertex Cover -> Dominating Set.
      *
      * Para cada arista (v,w) de G:
-     *   - Se agrega un nuevo vértice vw
+     *   - Se agrega un nuevo vertice vw
      *   - Se conecta vw con v y con w
-     *   - La arista original (v,w) se conserva (ya está en G)
+     *   - La arista original (v,w) se conserva (ya esta en G)
      *
      * El valor de k se conserva.
      */
     public static Grafica reducir(Grafica g) {
         Grafica gp = new Grafica();
 
-        // 1. Copiamos los vértices originales con el mismo id
+        // 1. Copiamos los vertices originales con el mismo id
         for (Nodo n : g.getNodos()) {
             gp.agregarNodo(new Nodo(n.getId(), true, n.getEtiqueta()));
         }
@@ -27,18 +27,17 @@ public class Reduccion {
             gp.agregarArista(a[0], a[1]);
         }
 
-        // 3. Para cada arista (v,w) agregamos el nuevo vértice vw y sus dos aristas
+        // 3. Para cada arista (v,w) agregamos el nuevo vertice vw y sus dos aristas
         int siguienteId = maxId(g) + 1;
 
         for (int[] a : g.getAristas()) {
             int v = a[0];
             int w = a[1];
 
-            String etiquetaNueva = "v" + v + "v" + w; // por ejemplo "v1v2"
+            String etiquetaNueva = "v" + v + "v" + w;
             Nodo nuevo = new Nodo(siguienteId, false, etiquetaNueva);
             gp.agregarNodo(nuevo);
 
-            // aristas (v, vw) y (w, vw)
             gp.agregarArista(v, siguienteId);
             gp.agregarArista(w, siguienteId);
 

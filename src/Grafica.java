@@ -3,6 +3,11 @@ package src;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Gráfica no dirigida con lista de adyacencia. Guarda los nodos y permite
+ * agregar aristas sin duplicarlas.
+ */
+
 public class Grafica {
 
     private List<Nodo> nodos;
@@ -27,7 +32,7 @@ public class Grafica {
 
     /**
      * Agrega una arista entre los nodos con esos ids.
-     * @return true si la arista se agregó, false si ya existía (idempotente).
+     * @return true si la arista se agrego, false si ya existia 
      */
     public boolean agregarArista(int idA, int idB) {
         Nodo a = buscarNodo(idA);
@@ -46,7 +51,6 @@ public class Grafica {
 
     public List<Nodo> getNodos() { return nodos; }
 
-    /** Devuelve las aristas una sola vez (u < v). */
     public List<int[]> getAristas() {
         List<int[]> aristas = new ArrayList<>();
         for (Nodo u : nodos) {
